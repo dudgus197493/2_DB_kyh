@@ -8,7 +8,7 @@ FROM TB_DEPARTMENT;
 
 SELECT DEPARTMENT_NAME || '의 정원은 ' 
 		|| CAPACITY || '명 입니다.' "학과별 정원"
-FROM TB_DEPARTMENT
+FROM TB_DEPARTMENT;
 
 -- 3 "국어국문학과" 에 다니는 여학생 중 
 -- 현재 휴학중인 여학생을 찾아달라는 요청이 들어왔다. 누구인가?

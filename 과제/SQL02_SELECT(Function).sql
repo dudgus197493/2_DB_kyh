@@ -18,7 +18,7 @@ WHERE NOT PROFESSOR_NAME LIKE '___';
 -- (단, 교수 중 2000년 이후 출생자는 없으며 출력 헤더는 "교수이름", "나이"로 한다. 나이는 '만'으로 계산한다.)
 
 SELECT PROFESSOR_NAME 교수이름,
-	FLOOR(MONTHS_BETWEEN(SYSDATE, TO_DATE('19' || SUBSTR(PROFESSOR_SSN, 1, 6), 'YY-MM-DD')) / 12 - 1) 나이
+	FLOOR(MONTHS_BETWEEN(SYSDATE, TO_DATE('19' || SUBSTR(PROFESSOR_SSN, 1, 6), 'YY-MM-DD')) / 12) 나이 -- -1을 할 필요가 없다.
 FROM TB_PROFESSOR
 WHERE SUBSTR(PROFESSOR_SSN, 8, 1) = '1'
 ORDER BY 2;
@@ -29,12 +29,14 @@ ORDER BY 2;
 SELECT SUBSTR(PROFESSOR_NAME, 2, 5) 이름
 FROM TB_PROFESSOR;
 
+
 -- 5. 춘 기술대학교의 재수생 입삭자를 구하려고 한다. 어떻게 찾아낼 것인가?
 -- 이때, 19 살에 입학하면 재수를 하지 않은 것으로 간주한다.
 
 SELECT  STUDENT_NO, STUDENT_NAME
 FROM TB_STUDENT
-WHERE EXTRACT(YEAR FROM ENTRANCE_DATE) - EXTRACT(YEAR FROM TO_DATE(SUBSTR(STUDENT_SSN, 1, 2), 'RR')) > 19;
+WHERE EXTRACT(YEAR FROM ENTRANCE_DATE) 
+- EXTRACT(YEAR FROM TO_DATE(SUBSTR(STUDENT_SSN, 1, 2), 'RR')) > 19;
 
 -- 6. 2020년 크리스마스는 무슨 요일인가?
 SELECT TO_CHAR(TO_DATE('2020-12-25') , 'DY"요일"') FROM DUAL; -- 금요일
@@ -86,6 +88,11 @@ FROM TB_STUDENT
 GROUP BY DEPARTMENT_NO
 ORDER BY 학과코드명;
 
+SELECT DEPARTMENT_NO 학과코드명, COUNT(DECODE(ABSENCE_YN, 'Y', 1)) "휴학생 수" -- 'Y'가 아니면 NULL로, COUNT은 NULL을 제외하고 수를 셈
+FROM TB_STUDENT
+GROUP BY DEPARTMENT_NO
+ORDER BY 학과코드명;
+
 -- 14. 춘 대학교에 다니는 동명이인 학생들의 이름을 찾고자 한다.
 -- 어떤 SQL문장을 사용하면 가능하겠는가?
 SELECT STUDENT_NAME 동일이름, COUNT(*) "동명인 수"
@@ -96,8 +103,8 @@ ORDER BY 동일이름;
 
 -- 15. 학번이 A112113인 김고운 학생의 년도, 학기 별 평점과 년도 별 누적 평점, 총 평점을 구하는 SQL문을 작성하시오.
 -- (단, 평점은 소수점 1자리까지만 반올림하여 표시한다.)
-SELECT SUBSTR(TERM_NO, 1, 4) 년도, SUBSTR(TERM_NO, 5, 2) 학기, ROUND(AVG(POINT), 1) 평점
+SELECT NVL(SUBSTR(TERM_NO, 1, 4), ' ') 년도, NVL(SUBSTR(TERM_NO, 5, 2), ' ') 학기, ROUND(AVG(POINT), 1) 평점
 FROM TB_GRADE
 WHERE STUDENT_NO = 'A112113'
 GROUP BY ROLLUP(SUBSTR(TERM_NO, 1, 4), SUBSTR(TERM_NO, 5, 2))
-ORDER BY 년도, 학기;
+ORDER BY SUBSTR(TERM_NO, 1, 4), SUBSTR(TERM_NO, 5, 2);
