@@ -187,7 +187,106 @@ OR EMP_NAME LIKE `%영%`;
 |`__A__`|세 번째 문자가 A인 다섯 글자 문자열|
 |`_____`|다섯 글자 문자열|
 ```SQL
+-- EMPLOYEE 테이블에서 전화번호가 010으로 시작하는 사원의
+-- 사번, 이름, 전화번호 조회
+SELECT EMP_ID, EMP_NAME, PHONE
+FROM EMPLOYEE
+WHERE PHONE LIKE '010________';
+```
 
+- ### ESCAPE
+```SQL
+-- EMAIL에서 _앞에 글자가 세 글자인 사원 조회
+SELECT EMP_NAME, EMAIL
+FROM EMPLOYEE
+WHERE EMAIL LIKE '____%'; -- 와일드카드 _과 리터럴 _이 구분되지 않음
+
+-- ESCAPE 사용해 해결
+SELECT EMP_NAME, EMAIL
+FROM EMPLOYEE
+WHERE EMAIL LIKE '___#_%' ESCAPE '#';
+-- #뒤에 있는 _는 문자열취급
+```  
+</br>
+
+## WHERE - IN
+> ### 비교하려는 값과 목록에 작성된 값 중 일치하는 것이 있으면 조회
+```SQL
+WHERE 컬럼명 IN (값1, 값2, 값3, ...)
+-- 위와 같은 구문
+WHERE 컬럼명 = 값1
+OR 컬럼명 = 값2
+OR 컬럼명 = 값3
+...
+```
+
+- ### IN
+```SQL
+-- EMPLOYEE 테이블에서
+-- 부서코드가 D1, D6, D7인 사원의
+-- 사번, 이름, 부서코드 조회
+SELECT EMP_ID, EMP_NAME, DEPT_CODE
+FROM EMPLOYEE
+WHERE DEPT_CODE IN ('D1', 'D6', 'D7');
+```
+
+- ### NOT IN
+```SQL
+-- EMPLOYEE 테이블에서
+-- 부서코드가 D1, D6, D7가 아닌 사원의
+-- 사번, 이름, 부서코드 조회
+SELECT EMP_ID, EMP_NAME, DEPT_CODE
+FROM EMPLOYEE
+WHERE DEPT_CODE NOT IN ('D1', 'D6', 'D7');
+```  
+</br>
+
+- ### NULL 처리 연산자
+> #### Java에서 NULL : 참조하는 객체가 없음을 의미하는 값
+> #### DB에서 NULL : 컬럼에 값이 없음을 의미하는 값
+> *IS NULL : NULL인 경우 조회*  
+> *IS NOT NULL : NULL이 아닌 경우 조회*
+```SQL
+-- EMPLOYEE 테이블에서 보너스가 있는 사원의 이름, 보너스 조회
+SELECT EMP_NAME, BONUS
+FROM EMPLOYEE
+WHERE BONUS IS NOT NULl;
+
+-- EMPLOYEE 테이블에서 보너스가 없는 사원의 이름, 보너스 조회
+SELECT EMP_NAME, BONUS
+FROM EMPLOYEE
+WHERE BONUS IS NULL;
+```
+
+## ORDER BY
+> ### SELECT문의 조회 결과(RESULT SET)를 정렬할 때 사용되는 구문
+> *SELECT문 해석 시 가장 마지막에 해석*
+```SQL
+ORDER BY 컬럼명 | 별칭 | 컬럼 순서 [ASC | DESC] [NULL FIRST | LAST]
+```
+- ### Sample SQL
+```SQL
+-- EMPLOYEE 테이블 급여 오름 차순으로
+-- 사번, 이름, 급여 조회
+SELECT EMP_ID, EMP_NAME, SALARY
+FROM EMPLOYEE
+ORDER BY SALARY; -- ASC 기본값
+
+-- 급여 200만 이상인 사원의
+-- 사번, 이름, 급여
+-- 급여 많은 순으로 조회
+SELECT EMP_ID, EMP_NAME, SALARY
+FROM EMPLOYEE
+WHERE SALARY >= 2000000
+ORDER BY 3 DESC; -- 컬럼 순서로 지정 가능 (가장 마지막에 해석되기 때문 )
+```
+- ### 정렬 중첩
+> #### 대분류 정렬 후 소분류 정렬
+```SQL
+-- 부서코드 오름차순 정렬 후 급여 내림차순 정렬
+SELECT EMP_NAME, DEPT_CODE, SALARY
+FROM EMPLOYEE
+ORDER BY DEPT_CODE, SALARY DESC;
 ```
 
 
