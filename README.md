@@ -1,5 +1,17 @@
 # 2_DB_kyh
- 
+
+## 할일
+- [ ] select.md 절 마다 파일 나누기
+- [ ] join.md 정리
+- [ ] DML.md 정리
+- [ ] TCL.md 정리
+- [ ] SubQuery.md 정리
+- [ ] DDL.md 정리
+- [ ] 결과가 필요한 Sample SQL에 조회결과 이미지 넣기
+- [ ] README.md 파일에 SQL, DB, DBMS 요약 정리
+- [ ] README.md 파일에 각 챕터별 문서링크 넣기
+
+
 ## SQL(Structured Query Language)
 > ###  관계형 데이터베이스에서 원하는 데이터를 조회, 조작 하기 위해 조건을 기술하는 언어
 
