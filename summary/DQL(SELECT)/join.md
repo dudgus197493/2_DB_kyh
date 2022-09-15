@@ -102,14 +102,14 @@ JOIN DEPARTMENT ON (DEPT_CODE = DEPT_ID);
 <h4><details>
     <summary>조회 결과</summary>
 
-![INNER JOIN Example](images/INNER%20JOIN%20Example.png)
+![INNER JOIN Example](images/join/join/INNER%20JOIN%20Example.png)
 > ### `DEPT_CODE = DEPT_ID`를 하는 과정에서 EMPLOYEE 테이블의 DEPT_CODE가 NULL인 행(하동운, 이오리)은 JOIN에서 제외 했다.
 </details></h4>
 
 <h4><details>
     <summary>EMPLOYEE 테이블의 행의 갯수</summary>
 
-![INNER JOIN Example2](images/INNER%20JOIN%20Example2.png)
+![INNER JOIN Example2](images/join/join/INNER%20JOIN%20Example2.png)
 
 </details></h4>
   
@@ -141,7 +141,7 @@ JOIN DEPARTMENT ON (DEPT_CODE = DEPT_ID);
     <h4><details>
         <summary>조회 결과</summary>
 
-    ![LEFT OUTER JOIN Example](images/LEFT%20OUTER%20JOIN%20Example.png)
+    ![LEFT OUTER JOIN Example](images/join/join/LEFT%20OUTER%20JOIN%20Example.png)
     > ### DEPT_CODE와 DEPT_ID가 같지 않아도 EMPLOYEE 테이블의 모든행을 무조건 JOIN에 포함
 
     </details></h4>
@@ -168,7 +168,7 @@ JOIN DEPARTMENT ON (DEPT_CODE = DEPT_ID);
     <h4><details>
         <summary>조회 결과</summary>
 
-    ![RIGHT OUTER JOIN Example](images/RIGHT%20OUTER%20JOIN%20Example.png)
+    ![RIGHT OUTER JOIN Example](images/join/RIGHT%20OUTER%20JOIN%20Example.png)
     > ### DEPT_ID와 DEPT_CODE가 같지 않아도 DEPARTMENT 테이블의 모든행을 무조건 JOIN에 포함
 
     </details></h4>
@@ -188,7 +188,7 @@ JOIN DEPARTMENT ON (DEPT_CODE = DEPT_ID);
     <h4><details>
         <summary>조회 결과</summary>
 
-    ![FULL OUTER JOIN Example](images/FULL%20OUTER%20JOIN%20Example.png))
+    ![FULL OUTER JOIN Example](images/join/FULL%20OUTER%20JOIN%20Example.png))
     > ### DEPT_ID와 DEPT_CODE가 같지 않아도 두 테이블의 모든행이 무조건 JOIN에 포함
 
     </details></h4>
@@ -217,10 +217,11 @@ CROSS JOIN DEPARTMENT;
 <h4><details>
     <summary>조회 결과</summary>
 
-![CROSS OUTER JOIN Example](images/CROSS%20OUTER%20JOIN%20Example.png)
+![CROSS OUTER JOIN Example](images/join/CROSS%20OUTER%20JOIN%20Example.png)
 > ### 쭉 207행 까지...
 
 </details></h4>
 
 
 ## 비등가 조인(NON EQUAL JOIN)
+
