@@ -102,14 +102,14 @@ JOIN DEPARTMENT ON (DEPT_CODE = DEPT_ID);
 <h4><details>
     <summary>조회 결과</summary>
 
-![INNER JOIN Example](images/join/join/INNER%20JOIN%20Example.png)
+![INNER JOIN Example](../images/join/INNER%20JOIN%20Example.png)
 > ### `DEPT_CODE = DEPT_ID`를 하는 과정에서 EMPLOYEE 테이블의 DEPT_CODE가 NULL인 행(하동운, 이오리)은 JOIN에서 제외 했다.
 </details></h4>
 
 <h4><details>
     <summary>EMPLOYEE 테이블의 행의 갯수</summary>
 
-![INNER JOIN Example2](images/join/join/INNER%20JOIN%20Example2.png)
+![INNER JOIN Example2](../images/join/INNER%20JOIN%20Example2.png)
 
 </details></h4>
   
@@ -141,7 +141,7 @@ JOIN DEPARTMENT ON (DEPT_CODE = DEPT_ID);
     <h4><details>
         <summary>조회 결과</summary>
 
-    ![LEFT OUTER JOIN Example](images/join/join/LEFT%20OUTER%20JOIN%20Example.png)
+    ![LEFT OUTER JOIN Example](../images/join/LEFT%20OUTER%20JOIN%20Example.png)
     > ### DEPT_CODE와 DEPT_ID가 같지 않아도 EMPLOYEE 테이블의 모든행을 무조건 JOIN에 포함
 
     </details></h4>
@@ -168,7 +168,7 @@ JOIN DEPARTMENT ON (DEPT_CODE = DEPT_ID);
     <h4><details>
         <summary>조회 결과</summary>
 
-    ![RIGHT OUTER JOIN Example](images/join/RIGHT%20OUTER%20JOIN%20Example.png)
+    ![RIGHT OUTER JOIN Example](../images/join/RIGHT%20OUTER%20JOIN%20Example.png)
     > ### DEPT_ID와 DEPT_CODE가 같지 않아도 DEPARTMENT 테이블의 모든행을 무조건 JOIN에 포함
 
     </details></h4>
@@ -188,7 +188,7 @@ JOIN DEPARTMENT ON (DEPT_CODE = DEPT_ID);
     <h4><details>
         <summary>조회 결과</summary>
 
-    ![FULL OUTER JOIN Example](images/join/FULL%20OUTER%20JOIN%20Example.png))
+    ![FULL OUTER JOIN Example](../images/join/FULL%20OUTER%20JOIN%20Example.png))
     > ### DEPT_ID와 DEPT_CODE가 같지 않아도 두 테이블의 모든행이 무조건 JOIN에 포함
 
     </details></h4>
@@ -217,11 +217,179 @@ CROSS JOIN DEPARTMENT;
 <h4><details>
     <summary>조회 결과</summary>
 
-![CROSS OUTER JOIN Example](images/join/CROSS%20OUTER%20JOIN%20Example.png)
+![CROSS OUTER JOIN Example](../images/join/CROSS%20OUTER%20JOIN%20Example.png)
 > ### 쭉 207행 까지...
 
-</details></h4>
+</details></h4>  
+</br>
 
 
 ## 비등가 조인(NON EQUAL JOIN)
+> ### `=`(등호)를 사용하지 않는 조인
+> ### 지정한 컬럼 값이 일치하는 경우가 아닌, 값의 범위에 포함되는 행들을 연결하는 방식
+```SQL
+SELECT EMP_NAME, SALARY, S.SAL_LEVEL
+FROM EMPLOYEE E
+JOIN SAL_GRADE S ON (SALARY BETWEEN MIN_SAL AND MAX_SAL);
+-- EMPLOYEE 테이블의 SALARY가 SAL_GRADE 테이블의 MIN_SAL이상 MAX_SAL이하 범위에 포함되면 조인
+```
+
+<h4><details>
+    <summary>조회 결과</summary>
+
+![NON EQUAL JOIN Example](../images/join/NEQ%20JOIN%20Example.png)
+> ### SALARY가 3,700,000인 노옹철 행이 SAL_LEVEL이 'S4'인 MIN_SAL(3,000,000) ~ MAX_SAL(3,999,999) 범위에 포함되어서 조인 
+
+</details></h4>  
+</br>
+
+<h4><details>
+    <summary>EMPLOYEE 조회</summary>
+
+![CROSS OUTER JOIN Example](../images/join/NEQ%20JOIN%20EMP_RS.png)
+
+</details></h4>  
+
+<h4><details>
+    <summary>SAL_GRADE 조회</summary>
+
+![CROSS OUTER JOIN Example](../images/join/SAL_GRADE_RS.png)
+
+</details></h4>  
+
+
+</br>
+
+## 자체 조인(SELF JOIN)
+> ### 같은 테이블을 조인
+> ### 자기 자신과 조인을 맺음
+> ***컬럼명의 구분은 별칭을 사용***  
+> *같은 테이블이 개 있다고 생각하고 JOIN 진행*
+
+- ### ANSI
+```SQL
+-- 사번, 이름, 사수의 사번, 사수 이름 조회
+SELECT E1.EMP_ID, E1.EMP_NAME, E2.EMP_ID, E2.EMP_NAME
+FROM EMPLOYEE E1
+LEFT JOIN EMPLOYEE E2 (E1.MANAGER_ID = E2.EMP_ID);
+```
+
+- ### Oracle
+```SQL
+SELECT E1.EMP_ID, E1.EMP_NAME, E2.EMP_ID, E2.EMP_NAME
+FROM EMPLOYEE E1, EMPLOYEE E2
+WHERE E1.MANAGER_ID = E2.EMP_ID(+);
+```
+
+<h4><details>
+    <summary>조회 결과</summary>
+
+![SELF JOIN Example](../images/join/SELF%20JOIN%20Example.png);
+
+</details></h4>  
+</br>
+
+
+- ### 자체 조인 주의점
+> #### 같은 행끼리 조인되어 원하는 결과를 얻지 못할 수 있음
+```SQL
+-- 같은 부서에 근무하는 직원들의 사원명, 부서코드, 동료이름을 조회하시오.
+-- SQL 1.
+SELECT E1.EMP_NAME 사원명, E1.DEPT_CODE 부서코드, E2.EMP_NAME 동료이름
+FROM EMPLOYEE E1
+JOIN EMPLOYEE E2 ON (E1.DEPT_CODE = E2.DEPT_CODE) --> 같은 행끼리 조인되는 경우가 생김
+ORDER BY 사원명; 
+
+-- SQL 2.
+SELECT E1.EMP_NAME 사원명, E1.DEPT_CODE 부서코드, E2.EMP_NAME 동료이름
+FROM EMPLOYEE E1
+JOIN EMPLOYEE E2 ON (E1.DEPT_CODE = E2.DEPT_CODE)
+WHERE E1.EMP_ID != E2.EMP_ID --> 같은 행끼리 조이뇌는 것을 막아줘야 함
+ORDER BY 사원명;
+```
+
+<h4><details>
+    <summary>SQL 1 조회 결과</summary>
+
+![SELF JOIN Example2](../images/join/SELF%20JOIN%20Example2.png);
+> ### 3행에 김해술과 김해술이 조인됨.
+> *Result Row 81*
+
+</details></h4> 
+
+<h4><details>
+    <summary>SQL 2 조회 결과</summary>
+
+![SELF JOIN Example3](../images/join/SELF%20JOIN%20Example3.png);
+> ### WHERE 조건을 통해 같은 행끼리 조인되는 것을 막음.
+> *Result Row 60*
+
+</details></h4>  
+</br>
+
+
+## 자연 조인 (NATURAL JOIN)
+> ### 동일한 타입과 이름을 가진 컬럼이 있는 테이블 간의 조인을 간단히 표현하는 방법
+> ### *반드시 두 테이블 간의 **동일한 컬럼명, 타입**을 가진 컬럼이 필요*
+> *동일한 컬럼명, 타입이 없을 경우 교차조인 됨*
+```SQL
+-- SQL 1. 테이블 EMPLOYEE, JOB에는 타입과 컬럼명이 동일한 JOB_CODE 컬럼이 존재
+SELECT EMP_NAME, JOB_NAME
+FROM EMPLOYEE
+NATURAL JOIN JOB;
+
+-- SQL 2. 테이블 EMPLOYEE, DEPARTMENT에는 타입과 컬럼명이 동일한 컬림이 없음
+SELECT EMP_NAME, DEPT_TITLE
+FROM EMPLOYEE
+NATURAL JOIN DEPARTMENT;
+```
+
+<h4><details>
+    <summary>SQL 2 동일한 컬럼명, 타입이 없을 경우 교차조인</summary>
+
+![NATURAL JOIN Example1](../images/join/NATURAL%20JOIN%20Example.png);
+> *Result Row 207*
+
+</details></h4>  
+</br>
+
+## 다중 조인
+> ### N개의 테이블을 조회할 때 사용
+> ### 다중 조인 시 앞에서 조인된 결과에 새로운 테이블 내용을 조인
+> *조인 시 순서가 중요*
+
+- ### ANSI
+```SQL
+-- 사원이름, 부서명, 지역명 조회
+--> EMPLOYEE. DEPARTMENT, LOCATION 테이블 조회
+SELECT EMP_NAME, DEPT_TITLE, LOCAL_NAME
+FROM EMPLOYEE
+JOIN DEPARTMENT ON (DEPT_CODE = DEPT_ID)
+JOIN LOCATION ON (LOCATION_ID = LOCAL_CODE);
+```
+
+- ### Oracle
+```SQL
+SELECT EMP_NAME, DEPT_TITLE, LOCAL_NAME
+FROM EMPLOYEE
+WHERE DEPT_CODE = DEPT_ID
+AND LOCATION_ID = LOCAL_NAME
+```
+
+- ### 다중 조인 주의점
+> *조인 순서에 주의*
+```SQL
+SELECT E.EMP_NAME, D.DEPT_TITLE, L.LOCAL_NAME
+FROM EMPLOYEE E
+JOIN LOCATION L ON (D.LOCATION_ID = L.LOCAL_CODE) -- 아직 DEPARTMENT 테이블과 조인하기 전이므로 DPARMENT 테이블의 LOCATION_ID 컬럼을 사용하여 LOCATION 테이블과 조인할 수 없다.
+JOIN DEPARTMENT D ON (E.DEPT_CODE = D.DEPT_ID);
+-- ORA-00904L: "LOCATION_ID": 부적합한 식별자
+
+-- 해결 : EMPLOYEE, DEPARTMENT를 먼저 조인하여 LOCATION_ID 컬럼을 먼저 테이블에 추가한다.
+SELECT E.EMP_NAME, D.DEPT_TITLE, L.LOCAL_NAME
+FROM EMPLOYEE E
+JOIN DEPARTMENT D ON (E.DEPT_CODE = D.DEPT_ID)
+JOIN LOCATION L ON (D.LOCATION_ID = L.LOCAL_CODE);
+```
+
 

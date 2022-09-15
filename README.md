@@ -2,14 +2,16 @@
 
 ## 할일
 - [x] select.md 절 마다 파일 나누기
-- [ ] join.md 정리
+- [x] join.md 정리
 - [ ] DML.md 정리
 - [ ] TCL.md 정리
 - [ ] SubQuery.md 정리
 - [ ] DDL.md 정리
+- [ ] DCL.md 정리
 - [ ] 결과가 필요한 Sample SQL에 조회결과 이미지 넣기
 - [x] README.md 파일에 SQL, DB, DBMS 요약 정리
 - [x] README.md 파일에 각 챕터별 문서링크 넣기
+- [ ] DML.md 파일 서브쿼리 사용구문에 서브쿼리 파일링크 걸기
 
 
 ## SQL(Structured Query Language)
