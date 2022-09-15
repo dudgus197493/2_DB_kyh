@@ -70,6 +70,8 @@ JOIN TB_PROFESSOR P USING(PROFESSOR_NO)
 JOIN TB_DEPARTMENT D ON (P.DEPARTMENT_NO = D.DEPARTMENT_NO)
 WHERE CATEGORY = '인문사회';
 
+
+
 -- 10. '음악학과' 학생들의 평점을 구하려고 한다. 
 -- 음악학과 학생들의 "학번", "학생 이름", "전체 평점"을 출력하는 SQL 문장을 작성하시오.
 -- (단, 평점은 소수점 1자리까지만 반올림하여 표시)
@@ -229,7 +231,3 @@ WHERE D.CATEGORY = (
 AND C.CLASS_TYPE LIKE '전공%'
 GROUP BY D.DEPARTMENT_NAME
 ORDER BY "계열 학과명";
-
-	
-	
-	
