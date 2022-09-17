@@ -3,8 +3,8 @@
 ## 할일
 - [x] select.md 절 마다 파일 나누기
 - [x] join.md 정리
-- [ ] DML.md 정리
-- [ ] TCL.md 정리
+- [x] DML.md 정리
+- [X] TCL.md 정리
 - [ ] SubQuery.md 정리
 - [ ] DDL.md 정리
 - [ ] DCL.md 정리
@@ -20,7 +20,7 @@
 |분류|용도|명령어|
 |:--:|:--:|:--:|
 |**DQL**</br>(Data Query Language)|데이터 검색| [SELECT](summary/DQL(SELECT)/head-select.md)</br>(SELECT는 DML로도 분류)|
-|**DML**</br>(Data Manipulation Language)|데이터 조작|INSERT, UPDATE, DELETE|
+|**DML**</br>(Data Manipulation Language)|데이터 조작|[INSERT, UPDATE, DELETE](summary/DML(INSERT,%20UPDATE,%20DELETE).md)|
 |DDL</br>(Data Definition Language)|데이터 정의|CEATE, DROP, ALTER|
 |DCL</br>(Data Control Language)|데이터 제어|GRANT, REVOKE|
 |**TCL**</br>(Transaction Control Language)|트랜젝션 제어|COMMIT, ROLLBACK|  
