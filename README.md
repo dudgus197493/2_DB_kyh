@@ -6,7 +6,7 @@
 - [x] DML.md 정리
 - [X] TCL.md 정리
 - [ ] SubQuery.md 정리
-- [ ] DDL.md 정리
+- [x] DDL.md 정리
 - [ ] DCL.md 정리
 - [ ] 결과가 필요한 Sample SQL에 조회결과 이미지 넣기
 - [x] README.md 파일에 SQL, DB, DBMS 요약 정리
@@ -21,9 +21,9 @@
 |:--:|:--:|:--:|
 |**DQL**</br>(Data Query Language)|데이터 검색| [SELECT](summary/DQL(SELECT)/head-select.md)</br>(SELECT는 DML로도 분류)|
 |**DML**</br>(Data Manipulation Language)|데이터 조작|[INSERT, UPDATE, DELETE](summary/DML(INSERT,%20UPDATE,%20DELETE).md)|
-|DDL</br>(Data Definition Language)|데이터 정의|CEATE, DROP, ALTER|
+|[DDL</br>(Data Definition Language)](summary/DDL(CREATE,%20ALTER,%20DROP)/head-DDL.md)|데이터 정의|[CEATE](summary/DDL(CREATE,%20ALTER,%20DROP)/CREATE.md), [DROP, ALTER](summary/DDL(CREATE,%20ALTER,%20DROP)/ALTER.md)|
 |DCL</br>(Data Control Language)|데이터 제어|GRANT, REVOKE|
-|**TCL**</br>(Transaction Control Language)|트랜젝션 제어|COMMIT, ROLLBACK|  
+|**TCL**</br>(Transaction Control Language)|트랜젝션 제어|[COMMIT, ROLLBACK](summary/TCL(COMMIT,%20ROLLBACK,%20SAVEPOINT).md)|  
 
 </br>
 
