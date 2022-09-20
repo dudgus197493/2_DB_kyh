@@ -14,9 +14,9 @@
 |구분|정의|
 |:--:|:--|
 |테이블(TABLE)||
-|뷰(VIEW)||
-|시퀀스(SEQUENCE)||
-|인덱스(INDEX)||
+|[뷰(VIEW)](../Object/VIEW.md)||
+|[시퀀스(SEQUENCE)](../Object/SEQUENCE.md)||
+|[인덱스(INDEX)](../Object/INDEX.md)||
 |패키지(PACKAFGE)||
 |트리거(TRIGGER)||
 |프로시져(PROCEDURE)||
